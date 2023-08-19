@@ -1,3 +1,5 @@
+import "dotenv/config.js"
+import "./config/database.js"
 import express from 'express';
 import cors from 'cors';
 import router from './routes/index.js';
@@ -9,4 +11,4 @@ server.use(express.json())
 server.use('/api', router)
 
 
-server.listen(3000, () => { console.log('Escuchando el puerto 3000') })
+server.listen(process.env.PORT, () => { console.log('Escuchando el puerto ' + process.env.PORT) })
