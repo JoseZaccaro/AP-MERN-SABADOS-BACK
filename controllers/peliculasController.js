@@ -1,30 +1,74 @@
-import { peliculas } from './../utils/peliculas.js';
+// import { peliculas } from './../utils/peliculas.js';
+
+import { Pelicula } from "../models/Peliculas.js";
 
 const peliculasController = {
-    getAllMovies: (req, res, next) => {
+    getAllMovies: async (req, res, next) => {
+        try {
+            const peliculas = await Pelicula.find()
+            res.json({
+                peliculas,
+                success: true,
+                error: null
+            })
+        } catch (error) {
+            console.log(error);
+        }
 
-        res.json({
-            peliculas,
-            success: true,
-            error: null
-        })
     },
-    postAMovie: (req, res, next) => {
-        peliculas.push(req.body)
-        res.json({
-            peliculas,
-            success: true,
-            error: null
-        })
+    getAMovie: async (req, res, next) => {
+        const id = req.params.id
+        try {
+            const pelicula = await Pelicula.findById(id).select("-__v")
+
+            res.json({
+                pelicula,
+                success: true,
+                error: null
+            })
+        } catch (error) {
+            console.log(error);
+        }
+
     },
-    getAMovie: (req, res, next) => {
-        const peli = peliculas.find(peli => peli.nombre == req.params.variable)
-        res.json({
-            info: peli,
-            success: true,
-            error: null
-        })
-    }
+    postAMovie: async (req, res, next) => {
+        try {
+            const {
+                nombre,
+                genero,
+                anio,
+                descripcion,
+                imagen_detalle,
+                imagen_portada,
+                duracion,
+                director,
+                actores,
+                video_url
+            } = req.body
+            const pelicula = new Pelicula(
+                {
+                    nombre,
+                    genero,
+                    anio,
+                    descripcion,
+                    imagen_portada,
+                    imagen_detalle,
+                    duracion,
+                    director,
+                    actores,
+                    video_url
+                }
+            )
+            await pelicula.save()
+            res.json({
+                pelicula,
+                success: true,
+                error: null
+            })
+        } catch (err) {
+            console.log(err);
+        }
+    },
 }
 
 export default peliculasController

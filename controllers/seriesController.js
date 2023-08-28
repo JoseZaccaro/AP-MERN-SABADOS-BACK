@@ -18,7 +18,7 @@ const seriesController = {
     getASerie: async (req, res, next) => {
         const id = req.params.id
         try {
-            const serie = await Serie.findById(id).select("-imagen_portada -anio -__v").populate({
+            const serie = await Serie.findById(id).select("-__v").populate({
                 path:'capitulos',
                 select:'-__v'
             })

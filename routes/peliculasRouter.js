@@ -3,7 +3,7 @@ import peliculasController from '../controllers/peliculasController.js';
 const peliculasRouter = Router()
 
 peliculasRouter.get('/', peliculasController.getAllMovies)
-peliculasRouter.get('/:variable', peliculasController.getAMovie)
+peliculasRouter.get('/:id', peliculasController.getAMovie)
 peliculasRouter.post('/', peliculasController.postAMovie)
 
 
