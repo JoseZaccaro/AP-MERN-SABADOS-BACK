@@ -4,6 +4,6 @@ import seriesRouter from './seriesRouter.js';
 import peliculasRouter from './peliculasRouter.js';
 
 router.use('/series', seriesRouter)
-router.use('/peliculas', peliculasRouter)
+router.use('/movies', peliculasRouter)
 
 export default router
