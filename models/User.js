@@ -3,6 +3,8 @@ import { Schema, Types, model } from "mongoose";
 const userSchema = Schema({
     name: { type: String },
     lastName: { type: String },
+    username: { type: String, required: true },
+    password: { type: String, required: true },
     favorites: [{ type: Types.ObjectId, ref: 'serie' }, { type: Types.ObjectId, ref: 'movie' }]
 })
 
